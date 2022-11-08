@@ -25,7 +25,9 @@ import io.ktor.client.statement.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import utils.Colors
+import utils.ImageUtil
 import java.io.ByteArrayInputStream
+
 
 @Composable
 fun AsyncImage(
@@ -46,10 +48,19 @@ fun AsyncImage(
                     withContext(Dispatchers.IO) {
                         val _url = if (needAddHttp) "https://$url" else url
                         val response = it.get(_url)
-                        ByteArrayInputStream(response.readBytes())
+                        val responseByteArray = ByteArrayInputStream(response.readBytes())
+                        val compressingImageByteArray = ImageUtil().compressImageAndResize(
+                            bytes = responseByteArray,
+                            width = 400,
+                            height = 400,
+                            compressValue = 0.5f
+                        )
+                        ByteArrayInputStream(compressingImageByteArray)
                     }
                 }
-                    .use(::loadImageBitmap)
+                    .use {
+                        loadImageBitmap(it)
+                    }
                     .also {
                         it.prepareToDraw()
                         image = it

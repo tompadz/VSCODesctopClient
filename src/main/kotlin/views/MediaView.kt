@@ -29,7 +29,7 @@ fun MediaView(
             AsyncImage(
                 url = media.image!!.responsive_url,
                 modifier = Modifier
-                    .width(80.dp)
+                    .width(150.dp)
                     .height(150.dp)
                     .padding(1.dp)
                     .clickable {
@@ -42,7 +42,7 @@ fun MediaView(
         "video" -> {
             Box(
                 modifier = Modifier
-                    .width(80.dp)
+                    .width(150.dp)
                     .height(150.dp)
                     .padding(1.dp)
                     .clickable {

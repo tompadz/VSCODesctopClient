@@ -59,20 +59,26 @@ fun MainProfileList(
                     when (viewType) {
                         is ProfileListViewType.HeaderPage -> {
                             stickyHeader {
-                                Box(
+                                Column(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .background(Colors.field)
-                                        .padding(6.dp)
                                 ) {
-                                    val text = "${viewType.page + 1} page"
-                                    Text(
-                                        text = text,
-                                        textAlign = TextAlign.Center,
+                                    Box(
                                         modifier = Modifier
-                                            .alpha(0.3f)
                                             .fillMaxWidth()
-                                    )
+                                            .background(Colors.field)
+                                            .padding(6.dp)
+                                    ) {
+                                        val text = "page #${viewType.page + 1}"
+                                        Text(
+                                            text = text,
+                                            textAlign = TextAlign.Center,
+                                            modifier = Modifier
+                                                .alpha(0.3f)
+                                                .fillMaxWidth()
+                                        )
+                                    }
+                                    Divider()
                                 }
                             }
                         }

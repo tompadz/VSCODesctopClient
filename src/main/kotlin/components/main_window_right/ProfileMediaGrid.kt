@@ -63,7 +63,7 @@ fun ProfileMediaGrid(
         }else {
 
             LazyVerticalGrid(
-                cells = GridCells.Adaptive(minSize = 128.dp),
+                cells = GridCells.Fixed(3),
             ) {
 
                 items(media) { item ->
@@ -76,9 +76,10 @@ fun ProfileMediaGrid(
                     item {
                         Box(
                             modifier = Modifier
-                                .width(80.dp)
+                                .width(150.dp)
                                 .height(150.dp)
                                 .padding(1.dp)
+                                .background(Colors.field)
                         ) {
                             CircularProgressIndicator(
                                 modifier = Modifier
@@ -95,7 +96,7 @@ fun ProfileMediaGrid(
                     item {
                         Box(
                             modifier = Modifier
-                                .width(80.dp)
+                                .width(150.dp)
                                 .height(150.dp)
                                 .padding(1.dp)
                                 .background(Colors.field)

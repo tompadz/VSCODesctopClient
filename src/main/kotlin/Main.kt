@@ -15,9 +15,9 @@ fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
         title = "VSCO",
-        state = rememberWindowState(width = 800.dp, height = 600.dp)
+        state = rememberWindowState(width = 800.dp, height = 600.dp),
+        resizable = false
     ) {
-        window.minimumSize = Dimension(800, 600)
 
         MainWindow(this)
     }
