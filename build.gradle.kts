@@ -30,11 +30,20 @@ tasks.withType<KotlinCompile> {
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+        mainClass = "VSCO"
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "VSCODesctop"
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
+            packageName = "VSCO"
             packageVersion = "1.0.0"
+            description = "Desktop client VSCO"
+            licenseFile.set(project.file("LICENSE.md"))
+            macOS {
+                iconFile.set(project.file("logo.icns"))
+                dockName = "VSCO"
+            }
+            windows {
+                iconFile.set(File("logo.ico"))
+            }
         }
     }
 }

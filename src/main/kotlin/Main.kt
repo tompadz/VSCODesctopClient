@@ -12,6 +12,7 @@ import java.awt.Dimension
 fun main() = application {
     //check settings file
     AppSettings.initSettings()
+
     val icon = painterResource("logo.png")
     Window(
         onCloseRequest = ::exitApplication,
