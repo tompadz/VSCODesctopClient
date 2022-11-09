@@ -19,10 +19,12 @@ import androidx.compose.ui.window.MenuBar
 import data.models.ProfileModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import utils.AppUtils
 import utils.Colors
 import views.MainWindowLeftMenu
 import views.MainWindowRight
 import views.SettingsDialog
+import java.net.URI
 
 @Composable
 @Preview
@@ -49,7 +51,7 @@ fun MainWindow(window: FrameWindowScope) {
                     }
                 })
                 Item("Open github", onClick = {
-                    //TODO:"add github page"
+                    AppUtils().openInBrowser(URI("https://github.com/tompadz/VSCODesctopClient"))
                 })
             }
         }

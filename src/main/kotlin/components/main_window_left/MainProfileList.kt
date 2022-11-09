@@ -98,7 +98,7 @@ fun MainProfileList(
                             item {
                                 Divider(
                                     modifier = Modifier
-                                        .padding(start = 63.dp)
+                                        .padding(start = 70.dp)
                                 )
                             }
                         }else {

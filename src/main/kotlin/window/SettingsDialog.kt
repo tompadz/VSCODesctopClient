@@ -17,8 +17,10 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.rememberDialogState
 import utils.AppSettings
+import utils.AppUtils
 import utils.Colors
 import java.awt.Dimension
+import java.net.URI
 
 @Composable
 fun SettingsDialog(
@@ -194,7 +196,7 @@ fun SettingsDialog(
 
             TextButton(
                 onClick = {
-                    //TODO:"add github"
+                    AppUtils().openInBrowser(URI("https://github.com/tompadz/VSCODesctopClient"))
                 }
             ) {
                 Text(

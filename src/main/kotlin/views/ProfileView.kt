@@ -31,7 +31,7 @@ fun ProfileView(
         items = {
             listOf(
                 ContextMenuItem(
-                    label = "Открыть в браузере"
+                    label = "Open in browser"
                 ) {
                     AppUtils().openInBrowser(
                         URI("https://${profile.url}")
@@ -70,7 +70,7 @@ fun ProfileView(
                     Text(profile.name, maxLines = 1)
                     if (AppSettings.settings.needShowImageCount) {
                         val counts = if (profile.imagesLargerThanMax) "${profile.imageCount}+" else profile.imageCount.toString()
-                        Text("$counts - фото")
+                        Text("$counts - media")
                     }else {
                         Text(profile.url)
                     }
