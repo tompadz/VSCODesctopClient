@@ -2,6 +2,7 @@ package views
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import components.main_window_left.MainHeader
@@ -11,6 +12,7 @@ import data.providers.SearchProvider
 import kotlinx.coroutines.launch
 import utils.LoadingStateListener
 import utils.ProfileListViewType
+import window.ScrollToDialog
 
 @Composable
 @Preview
@@ -22,6 +24,9 @@ fun MainWindowLeftMenu(
 ) {
 
     val coroutineScope = rememberCoroutineScope()
+    val scrollState = rememberLazyListState()
+
+    var needShowFilter: Boolean by remember { mutableStateOf(false) }
 
     var isLoading: Boolean by remember { mutableStateOf(false) }
     var isLastPage: Boolean by remember { mutableStateOf(false) }
@@ -29,6 +34,7 @@ fun MainWindowLeftMenu(
 
     var searchQuery: String by remember { mutableStateOf("") }
     var listPage: Int by remember { mutableStateOf(0) }
+    var listHeadersIndex : MutableList<Int> by remember { mutableStateOf(mutableListOf()) }
 
     var profiles: MutableList<ProfileListViewType> by remember { mutableStateOf(mutableListOf()) }
 
@@ -48,6 +54,8 @@ fun MainWindowLeftMenu(
         query: String = searchQuery,
         page: Int = listPage
     ) {
+        listHeadersIndex = mutableListOf()
+        error = null
         listPage = page
         searchQuery = query
         coroutineScope.launch {
@@ -65,6 +73,27 @@ fun MainWindowLeftMenu(
                 }
             }
         }
+    }
+
+    if (needShowFilter) {
+        ScrollToDialog(
+            currentPage = listPage,
+            onPageChange = {
+                needShowFilter = false
+                if (it <= listPage) {
+                    val itemIndex = listHeadersIndex[it - 1]
+                    coroutineScope.launch {
+                        scrollState.animateScrollToItem(itemIndex)
+                    }
+                }else {
+                    listPage = it
+                    getUsersByQuery(page = listPage)
+                }
+            },
+            onCloseRequest = {
+                needShowFilter = false
+            }
+        )
     }
 
     Column {
@@ -86,7 +115,12 @@ fun MainWindowLeftMenu(
             onLoadMoreClick = {
                 getUsersByQuery(page = ++listPage)
             },
-            onProfileClick = onProfileChange
+            onProfileClick = onProfileChange,
+            onPageFilterClick = {
+                needShowFilter = true
+            },
+            state = scrollState,
+            listHeadersIndex = listHeadersIndex
         )
     }
 }

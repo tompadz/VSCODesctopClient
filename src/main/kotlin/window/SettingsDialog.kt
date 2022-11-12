@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.key.*
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -18,7 +17,8 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.rememberDialogState
 import utils.AppSettings
 import utils.AppUtils
-import utils.Colors
+import consts.Colors
+import consts.Theme
 import java.awt.Dimension
 import java.net.URI
 
@@ -39,176 +39,180 @@ fun SettingsDialog(
         onCloseRequest()
     }
 
-    Dialog(
-        onCloseRequest = onCloseRequest,
-        title = "Settings",
-        resizable = false,
-        state = rememberDialogState(width = 350.dp, height = 400.dp)
+    MaterialTheme(
+        colors = Theme.colors()
     ) {
-
-        window.minimumSize = Dimension(350, 400)
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White)
+        Dialog(
+            onCloseRequest = onCloseRequest,
+            title = "Settings",
+            resizable = false,
+            state = rememberDialogState(width = 350.dp, height = 400.dp)
         ) {
 
-            //needShowImageCount
-            Row(
+            window.minimumSize = Dimension(350, 400)
+
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal =  16.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .fillMaxSize()
+                    .background(Color.White)
             ) {
 
-                Column(
+                //needShowImageCount
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(1f)
+                        .padding(horizontal =  16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = "Show profile media count"
-                    )
-                    Text(
-                        text = "Shows how many media in each profile, significantly increases loading time",
+
+                    Column(
                         modifier = Modifier
-                            .alpha(0.3f)
-                            .padding(top = 5.dp),
-                        style = TextStyle(
-                            fontSize = 12.sp
+                            .fillMaxWidth()
+                            .weight(1f)
+                    ) {
+                        Text(
+                            text = "Show profile media count"
                         )
-                    )
-                }
-
-                Switch(
-                    checked = needShowImageCount,
-                    onCheckedChange = {
-                        needShowImageCount = it
-                    },
-
-                    )
-            }
-
-
-            //showOnlyUserWhoHaveMedia
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal =  16.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                ) {
-                    Text(
-                        text = "Show only users with medias"
-                    )
-                    Text(
-                        text = "significantly increases loading time",
-                        modifier = Modifier
-                            .alpha(0.3f)
-                            .padding(top = 5.dp),
-                        style = TextStyle(
-                            fontSize = 12.sp
-                        )
-                    )
-                }
-
-                Switch(
-                    checked = showOnlyUserWhoHaveMedia,
-                    onCheckedChange = {
-                        showOnlyUserWhoHaveMedia = it
-                    })
-            }
-
-            //minMediaCountToShow
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal =  16.dp, vertical = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                Text(
-                    text = "Show profile if media is greater than or equal to",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                )
-
-                Spacer(Modifier.width(16.dp))
-
-                BasicTextField(
-                    value = minMediaCountToShow.toString(),
-                    onValueChange = {
-                       try {
-                           minMediaCountToShow = if (it.isBlank() || it.toInt() == 0) {
-                               1
-                           }else{
-                               it.toInt()
-                           }
-                       }catch (_:Throwable){}
-                    },
-                    singleLine = true,
-                    modifier = Modifier
-                        .width(50.dp),
-                    decorationBox = { innerTextField ->
-                        Box(
+                        Text(
+                            text = "Shows how many media in each profile, significantly increases loading time",
                             modifier = Modifier
-                                .background(
-                                    Colors.field,
-                                    RoundedCornerShape(percent = 15)
-                                )
-                                .padding(vertical = 2.dp, horizontal = 5.dp)
-                                .height(25.dp),
-                            contentAlignment = Alignment.Center
-                        ){
-                            innerTextField()
-                        }
+                                .alpha(0.3f)
+                                .padding(top = 5.dp),
+                            style = TextStyle(
+                                fontSize = 12.sp
+                            )
+                        )
                     }
-                )
-            }
 
-            Button(
-                onClick = {
-                    saveSettings()
-                },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .padding(top = 16.dp)
+                    Switch(
+                        checked = needShowImageCount,
+                        onCheckedChange = {
+                            needShowImageCount = it
+                        },
 
-            ) {
-                Text(
-                    text = "Save",
-                    color = Color.White
-                )
-            }
-
-            Divider(modifier = Modifier
-                .padding(vertical = 16.dp)
-            )
-
-            TextButton(
-                onClick = {
-                    AppUtils().openInBrowser(URI("https://github.com/tompadz/VSCODesctopClient"))
+                        )
                 }
-            ) {
-                Text(
-                    text = "Github",
-                    color = Color.DarkGray,
+
+
+                //showOnlyUserWhoHaveMedia
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
-                    style = TextStyle(
-                        fontSize = 14.sp
+                        .padding(horizontal =  16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
+                    ) {
+                        Text(
+                            text = "Show only users with medias"
+                        )
+                        Text(
+                            text = "significantly increases loading time",
+                            modifier = Modifier
+                                .alpha(0.3f)
+                                .padding(top = 5.dp),
+                            style = TextStyle(
+                                fontSize = 12.sp
+                            )
+                        )
+                    }
+
+                    Switch(
+                        checked = showOnlyUserWhoHaveMedia,
+                        onCheckedChange = {
+                            showOnlyUserWhoHaveMedia = it
+                        })
+                }
+
+                //minMediaCountToShow
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal =  16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    Text(
+                        text = "Show profile if media is greater than or equal to",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f)
                     )
+
+                    Spacer(Modifier.width(16.dp))
+
+                    BasicTextField(
+                        value = minMediaCountToShow.toString(),
+                        onValueChange = {
+                            try {
+                                minMediaCountToShow = if (it.isBlank() || it.toInt() == 0) {
+                                    1
+                                }else{
+                                    it.toInt()
+                                }
+                            }catch (_:Throwable){}
+                        },
+                        singleLine = true,
+                        modifier = Modifier
+                            .width(50.dp),
+                        decorationBox = { innerTextField ->
+                            Box(
+                                modifier = Modifier
+                                    .background(
+                                        Colors.field,
+                                        RoundedCornerShape(percent = 15)
+                                    )
+                                    .padding(vertical = 2.dp, horizontal = 5.dp)
+                                    .height(25.dp),
+                                contentAlignment = Alignment.Center
+                            ){
+                                innerTextField()
+                            }
+                        }
+                    )
+                }
+
+                Button(
+                    onClick = {
+                        saveSettings()
+                    },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                        .padding(top = 16.dp)
+
+                ) {
+                    Text(
+                        text = "Save",
+                        color = Color.White
+                    )
+                }
+
+                Divider(modifier = Modifier
+                    .padding(vertical = 16.dp)
                 )
+
+                TextButton(
+                    onClick = {
+                        AppUtils().openInBrowser(URI("https://github.com/tompadz/VSCODesctopClient"))
+                    }
+                ) {
+                    Text(
+                        text = "Github",
+                        color = Color.DarkGray,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        style = TextStyle(
+                            fontSize = 14.sp
+                        )
+                    )
+                }
             }
         }
     }

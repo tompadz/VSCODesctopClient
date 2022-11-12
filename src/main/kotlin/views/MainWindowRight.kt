@@ -42,6 +42,7 @@ fun MainWindowRight(
     val provider = ProfileProvider(profile.siteId , listener)
 
     fun getMedia() {
+        error = null
         coroutineScope.launch {
             when(val result = provider.getMedia(cursor)) {
                 is ProfileProvider.MediaResult.Error -> {

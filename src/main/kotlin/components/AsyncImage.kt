@@ -24,7 +24,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import utils.Colors
+import consts.Colors
 import utils.ImageUtil
 import java.io.ByteArrayInputStream
 
@@ -77,15 +77,7 @@ fun AsyncImage(
         Box(
             modifier
                 .background(Colors.field)
-        ) {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .size(14.dp),
-                color = Color.DarkGray,
-                strokeWidth = 2.dp
-            )
-        }
+        )
     }
 
     AnimatedVisibility(

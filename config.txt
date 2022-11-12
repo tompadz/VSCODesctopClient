@@ -1,1 +1,1 @@
-{"needShowImageCount":true,"showOnlyUserWhoHaveMedia":true,"minMediaCountToShow":1}
+{"needShowImageCount":false,"showOnlyUserWhoHaveMedia":false,"minMediaCountToShow":1}

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import components.AsyncImage
 import data.models.ProfileModel
 import utils.AppUtils
-import utils.Icons
+import consts.Icons
 import java.net.URI
 
 @Composable

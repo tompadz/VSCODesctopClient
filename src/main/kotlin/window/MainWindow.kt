@@ -20,7 +20,8 @@ import data.models.ProfileModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import utils.AppUtils
-import utils.Colors
+import consts.Colors
+import consts.Theme
 import views.MainWindowLeftMenu
 import views.MainWindowRight
 import views.SettingsDialog
@@ -42,22 +43,28 @@ fun MainWindow(window: FrameWindowScope) {
         }
     }
 
-    window.apply {
-        MenuBar {
-            Menu("Settings") {
-                Item("Open settings", onClick = {
-                    if (!showSettingsDialog && !isLoading) {
-                        showSettingsDialog = true
-                    }
-                })
-                Item("Open github", onClick = {
-                    AppUtils().openInBrowser(URI("https://github.com/tompadz/VSCODesctopClient"))
-                })
+    println(AppUtils().getOS())
+
+    if (AppUtils().getOS() == AppUtils.OS.MAC) {
+        window.apply {
+            MenuBar {
+                Menu("Settings") {
+                    Item("Open settings", onClick = {
+                        if (!showSettingsDialog && !isLoading) {
+                            showSettingsDialog = true
+                        }
+                    })
+                    Item("Open github", onClick = {
+                        AppUtils().openInBrowser(URI("https://github.com/tompadz/VSCODesctopClient"))
+                    })
+                }
             }
         }
     }
 
-    MaterialTheme {
+    MaterialTheme(
+        colors = Theme.colors()
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
@@ -74,7 +81,7 @@ fun MainWindow(window: FrameWindowScope) {
                         coroutineScope.launch {
                             if (currentProfile != null) {
                                 currentProfile = null
-                                delay(10)
+                                delay(100)
                                 currentProfile = it
                             }else {
                                 currentProfile = it

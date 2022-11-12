@@ -18,8 +18,8 @@ import androidx.compose.ui.input.key.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import utils.Icons
-import utils.Colors
+import consts.Icons
+import consts.Colors
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -39,7 +39,6 @@ fun SearchField(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             BasicTextField(
                 value = text,
                 onValueChange = {
@@ -105,25 +104,6 @@ fun SearchField(
                         onSearchPress(text)
                     }
             )
-
-//            TextButton(
-//                onClick = {
-//                    onSearchPress(text)
-//                },
-//                shape = CircleShape,
-//                colors = ButtonDefaults.buttonColors(
-//                    backgroundColor = Color.White
-//                ),
-//                enabled = buttonEnable,
-//                contentPadding = PaddingValues(0.dp)
-//            ) {
-//                Image(
-//                    painter = painterResource(Icons.search),
-//                    contentDescription = "Search",
-//                    modifier = Modifier
-//                        .size(24.dp)
-//                )
-//            }
         }
     }
 }
