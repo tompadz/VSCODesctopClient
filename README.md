@@ -1,19 +1,29 @@
 # VSCO desctop app
 
-A simple photo viewer app for VSCO social network
+A simple profile viewer app for VSCO social network
 
 ![preview](./img/preview.png)
+
 
 ## Features
 - Search users
 - Customizable search filters
-- Download photos
+
+## Soon...
+- User subscription
+- Mp4 format support
+- Download profile files in one click 
+- Full file preview
+
+> If you notice an error while using the application, do you have any ideas for
+new updates or just have questions, be sure to [post it](https://github.com/tompadz/VSCDesctopClient/issues),
+this is the only way I can answer this quickly
 
 ## Installation
 
 ### Windows
 
-Well, it's too easy. [Download](https://google.com/) and install the latest app....enjoy!
+Well, it's too easy. [Download](https://github.com/tompadz/VSCODesctopClient/releases) and install the latest app....enjoy!
 
 ### MacOS
 

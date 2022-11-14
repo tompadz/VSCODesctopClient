@@ -101,9 +101,11 @@ fun MainWindowLeftMenu(
             loadingState = isLoading,
             onSettingsClick = onSettingsClick,
             onSearchPress = {
-                profiles = mutableListOf()
-                listPage = 0
-                getUsersByQuery(it)
+                if (it.isNotBlank()) {
+                    profiles = mutableListOf()
+                    listPage = 0
+                    getUsersByQuery(it)
+                }
             }
         )
 
