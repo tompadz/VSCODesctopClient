@@ -12,11 +12,11 @@ A simple profile viewer app for VSCO social network
 ## Soon...
 - User subscription
 - Mp4 format support
-- Download profile files in one click 
+- Download profile files in one click   
 - Full file preview
 
 > If you notice an error while using the application, do you have any ideas for
-new updates or just have questions, be sure to [post it](https://github.com/tompadz/VSCDesctopClient/issues),
+new updates or just have questions, be sure to [post it](https://github.com/tompadz/VSCODesctopClient/issues),
 this is the only way I can answer this quickly
 
 ## Installation

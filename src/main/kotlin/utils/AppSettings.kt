@@ -12,7 +12,7 @@ object AppSettings {
     data class Settings(
         val needShowImageCount:Boolean = false,
         val showOnlyUserWhoHaveMedia:Boolean = false,
-        val minMediaCountToShow:Int = 0,
+        val minMediaCountToShow:Int = 1,
     )
 
     fun initSettings() {
